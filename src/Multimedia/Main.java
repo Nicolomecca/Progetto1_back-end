@@ -6,8 +6,19 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        /*
+        Il programma funziona in questo modo: quando si seleziona un elemento multimediale,
+        viene data la possibilità di regolare i comandi specifici per quell'elemento.
+        - Per un'immagine, è possibile aumentare o diminuire la luminosità.
+        - Per una registrazione audio, si può alzare o abbassare il volume.
+        - Per un video, si possono regolare sia il volume che la luminosità.
+
+        Premendo il tasto 0, si torna al menu principale per selezionare un altro elemento.
+        Le modifiche apportate saranno visibili quando l'elemento viene ristampato o riprodotto.
+        */
+
         ElementoMultimediale[] elementi = new ElementoMultimediale[5];
-        // Inizializza gli elementi multimediali
+        // Inizializzo gli elementi multimediali
         elementi[0] = new RegistrazioneAudio("Canzone 1", 3, 5);
         elementi[1] = new Video("Film 1", 2, 3, 4);
         elementi[2] = new Immagine("Immagine 1", 5);
@@ -26,6 +37,7 @@ public class Main {
                 if (scelta >= 1 && scelta <= 5) {
                     ElementoMultimediale elementoSelezionato = elementi[scelta - 1];
 
+                    // Controllo il tipo di elemento selezionato per eseguire le azioni appropriate
                     if (elementoSelezionato instanceof Immagine) {
                         ((Immagine) elementoSelezionato).show();
                         regolazioneLuminosita(scanner, (Immagine) elementoSelezionato);
@@ -55,6 +67,7 @@ public class Main {
                     "0: Torna al menu principale");
             action = Integer.parseInt(scanner.nextLine());
 
+            // Eseguo l'azione selezionata per regolare il volume dell'audio
             switch (action) {
                 case 1:
                     audio.alzaVolume();
@@ -74,6 +87,7 @@ public class Main {
                     "0: Torna al menu principale");
             action = Integer.parseInt(scanner.nextLine());
 
+            // Eseguo l'azione selezionata per regolare il volume e la luminosità del video
             switch (action) {
                 case 1:
                     video.alzaVolume();
@@ -98,14 +112,15 @@ public class Main {
                     "0: Torna al menu principale");
             action = Integer.parseInt(scanner.nextLine());
 
+            // Eseguo l'azione selezionata per regolare la luminosità dell'immagine
             switch (action) {
                 case 3:
                     immagine.aumentaLuminosita();
-                    immagine.show(); // Mostra l'immagine aggiornata
+                    immagine.show(); // Mostro l'immagine aggiornata dopo aver modificato la luminosità
                     break;
                 case 4:
                     immagine.diminuisciLuminosita();
-                    immagine.show(); // Mostra l'immagine aggiornata
+                    immagine.show(); // Mostro l'immagine aggiornata dopo aver modificato la luminosità
                     break;
             }
         } while (action != 0);
