@@ -41,11 +41,13 @@ public class Video extends ElementoMultimediale implements Riproducibile {
 
     @Override
     public int getDurata() {
-        return 0;
+        return durata;
     }
 
     @Override
     public void play() {
-
+        for (int i = 0; i < durata; i++) {
+            System.out.println(titolo + "!" + "!".repeat(volume) + "*".repeat(luminosità));
+        }
     }
 }
