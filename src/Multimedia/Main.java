@@ -7,7 +7,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
 
         ElementoMultimediale[] elementi = new ElementoMultimediale[5];
-        // Initialize multimedia elements
+        // Inizializza gli elementi multimediali
         elementi[0] = new RegistrazioneAudio("Canzone 1", 3, 5);
         elementi[1] = new Video("Film 1", 2, 3, 4);
         elementi[2] = new Immagine("Immagine 1", 5);
@@ -28,9 +28,13 @@ public class Main {
 
                     if (elementoSelezionato instanceof Immagine) {
                         ((Immagine) elementoSelezionato).show();
-                    } else if (elementoSelezionato instanceof Riproducibile) {
-                        ((Riproducibile) elementoSelezionato).play();
-                        regolazioneComandi(scanner, elementoSelezionato);
+                        regolazioneLuminosita(scanner, (Immagine) elementoSelezionato);
+                    } else if (elementoSelezionato instanceof RegistrazioneAudio) {
+                        ((RegistrazioneAudio) elementoSelezionato).play();
+                        regolazioneVolume(scanner, (RegistrazioneAudio) elementoSelezionato);
+                    } else if (elementoSelezionato instanceof Video) {
+                        ((Video) elementoSelezionato).play();
+                        regolazioneComandi(scanner, (Video) elementoSelezionato);
                     }
                 } else if (scelta != 0) {
                     System.out.println("Scelta non valida.");
@@ -43,7 +47,26 @@ public class Main {
         System.out.println("Arrivederci!");
         scanner.close();
     }
-    private static void regolazioneComandi(Scanner scanner, ElementoMultimediale elemento) {
+
+    private static void regolazioneVolume(Scanner scanner, RegistrazioneAudio audio) {
+        int action;
+        do {
+            System.out.println("1: Alza Volume | 2: Abbassa Volume | " +
+                    "0: Torna al menu principale");
+            action = Integer.parseInt(scanner.nextLine());
+
+            switch (action) {
+                case 1:
+                    audio.alzaVolume();
+                    break;
+                case 2:
+                    audio.abbassaVolume();
+                    break;
+            }
+        } while (action != 0);
+    }
+
+    private static void regolazioneComandi(Scanner scanner, Video video) {
         int action;
         do {
             System.out.println("1: Alza Volume | 2: Abbassa Volume | " +
@@ -51,33 +74,40 @@ public class Main {
                     "0: Torna al menu principale");
             action = Integer.parseInt(scanner.nextLine());
 
-            if (elemento instanceof RegistrazioneAudio) {
-                RegistrazioneAudio audio = (RegistrazioneAudio) elemento;
-                switch (action) {
-                    case 1:
-                        audio.alzaVolume();
-                        break;
-                    case 2:
-                        audio.abbassaVolume();
-                        break;
-                }
-            } else if (elemento instanceof Video) {
-                Video video = (Video) elemento;
-                switch (action) {
-                    case 1:
-                        video.alzaVolume();
-                        break;
-                    case 2:
-                        video.abbassaVolume();
-                        break;
-                    case 3:
-                        video.aumentaLuminosita();
-                        break;
-                    case 4:
-                        video.diminuisciLuminosita();
-                        break;
-                }
+            switch (action) {
+                case 1:
+                    video.alzaVolume();
+                    break;
+                case 2:
+                    video.abbassaVolume();
+                    break;
+                case 3:
+                    video.aumentaLuminosita();
+                    break;
+                case 4:
+                    video.diminuisciLuminosita();
+                    break;
             }
         } while (action != 0);
     }
+
+    private static void regolazioneLuminosita(Scanner scanner, Immagine immagine) {
+        int action;
+        do {
+            System.out.println("3: Aumenta Luminosità | 4: Diminuisci Luminosità | " +
+                    "0: Torna al menu principale");
+            action = Integer.parseInt(scanner.nextLine());
+
+            switch (action) {
+                case 3:
+                    immagine.aumentaLuminosita();
+                    immagine.show(); // Mostra l'immagine aggiornata
+                    break;
+                case 4:
+                    immagine.diminuisciLuminosita();
+                    immagine.show(); // Mostra l'immagine aggiornata
+                    break;
+            }
+        } while (action != 0);
     }
+}
