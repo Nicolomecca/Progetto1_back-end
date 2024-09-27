@@ -43,7 +43,6 @@ public class Main {
         System.out.println("Arrivederci!");
         scanner.close();
     }
-
     private static void regolazioneComandi(Scanner scanner, ElementoMultimediale elemento) {
         int action;
         do {
@@ -55,18 +54,30 @@ public class Main {
             if (elemento instanceof RegistrazioneAudio) {
                 RegistrazioneAudio audio = (RegistrazioneAudio) elemento;
                 switch (action) {
-                    case 1 -> audio.alzaVolume();
-                    case 2 -> audio.abbassaVolume();
+                    case 1:
+                        audio.alzaVolume();
+                        break;
+                    case 2:
+                        audio.abbassaVolume();
+                        break;
                 }
             } else if (elemento instanceof Video) {
                 Video video = (Video) elemento;
                 switch (action) {
-                    case 1 -> video.alzaVolume();
-                    case 2 -> video.abbassaVolume();
-                    case 3 -> video.aumentaLuminosita();
-                    case 4 -> video.diminuisciLuminosita();
+                    case 1:
+                        video.alzaVolume();
+                        break;
+                    case 2:
+                        video.abbassaVolume();
+                        break;
+                    case 3:
+                        video.aumentaLuminosita();
+                        break;
+                    case 4:
+                        video.diminuisciLuminosita();
+                        break;
                 }
             }
         } while (action != 0);
     }
-}
+    }
