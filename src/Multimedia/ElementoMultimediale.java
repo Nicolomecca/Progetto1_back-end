@@ -1,14 +1,9 @@
 package Multimedia;
 
 public abstract class ElementoMultimediale {
+    protected String titolo;
 
-    protected String titolo ;
-    protected TipoElementoMultimediale tipo;
-
-    public ElementoMultimediale (String titolo, TipoElementoMultimediale tipo) {
+    public ElementoMultimediale(String titolo) {
         this.titolo = titolo;
-        this.tipo = tipo;
     }
-
-
 }
